@@ -1,3 +1,35 @@
-body{
-    color: blanchedalmond;
-}
+
+@import "./global/header.css";
+@import "./global/footer.css";
+
+@import "./utilidades/tipografia.css";
+@import "./utilidades/cores.css";
+
+@import "./global/global.css";
+
+/* Serviços */
+@import "./servicos/servicos-tipos.css";
+
+/* Home */
+@import "./home/introducao.css";
+@import "./home/ods.css";
+@import "./home/onu.css";
+@import "./home/depoimento.css";
+
+
+@import "./compromisso.css/";
+@import "./compromisso/compromisso.css";
+
+/* Utilidades */
+@import "./utilidades/componentes.css";
+@import "./utilidades/formularios.css";
+
+@import "./termos/termos.css";
+
+@import "./login/login.css";
+ 
+@import "./energiaresiduos/perguntas.css";
+@import "./contato/contato.css";
+@import "./contato/pagina_dois.css";
+
+@import "./cadastro/cadastro.css";
