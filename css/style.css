@@ -17,7 +17,7 @@
 @import "./home/depoimento.css";
 
 
-@import "./compromisso.css/";
+@import "./compromisso.css";
 @import "./compromisso/compromisso.css";
 
 /* Utilidades */
@@ -27,6 +27,7 @@
 @import "./termos/termos.css";
 
 @import "./login/login.css";
+@import "./relatorio/pagina_gerar_relatorio.css";
  
 @import "./energiaresiduos/perguntas.css";
 @import "./contato/contato.css";
@@ -35,5 +36,4 @@
 @import "./descarte/descarte.css";
 
 @import "./cadastro/cadastro.css";
-@import "./contato/pagina_gerar_relatorio.css";
 @import "./pagina_dicas_de_sustentabilidade/pagina_dicas_de_sustentabilidade.css"
