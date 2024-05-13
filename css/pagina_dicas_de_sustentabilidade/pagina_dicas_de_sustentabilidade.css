@@ -1,0 +1,102 @@
+.dicas {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  
+  .dicas {
+    margin-bottom: 60px;
+  }
+  
+  .dicas dl > div {
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  .dicas dl > div:nth-child(odd) {
+    background-color: var(--cor-2);
+  }
+  
+  .dicas button{
+    background: var(--cor-2);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: none;
+    background-color:none;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .dicas button::before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 8px;
+    background-color: var(--cor-12);
+  }
+  
+  .dicas button::after {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 6px;
+    background: url("../../img/icones/seta-abrir.svg");
+    transition: 0.3s;
+  }
+  
+  .dicas button:hover::after {
+    transform: rotate(180deg);
+  }
+  
+  .dicas dd {
+    padding-left: 20px;
+    padding-top: 16px;
+    max-width: 80ch;
+  }
+  
+  @media (max-width: 800px) {
+    .dicas {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+    .dicas h2 {
+      margin-bottom: 40px;
+    }
+  }
+  .articles {
+    text-align: center; /* Centralize o conteúdo horizontalmente */
+}
+
+.articles h2 {
+    margin-bottom: 30px; /* Adicione espaço entre o título e o iframe */
+}
+
+.iframe-container {
+    display: flex; /* Use flexbox para centralizar */
+    justify-content: center; /* Centralize horizontalmente */
+    align-items: center; /* Centralize verticalmente */
+    border-radius: 10px; /* Adicione bordas arredondadas */
+    overflow: hidden; /* Oculte o conteúdo extra */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicione sombra suave */
+}
+
+.articles iframe {
+    max-width: 100%; /* Tamanho máximo do iframe */
+    border: none; /* Remova a borda do iframe */
+}
+
+.sustainability-tips {
+    padding: 20px;
+    background-color: #d4edda; /* Cor de fundo verde claro */
+    border-radius: 10px; /* Borda arredondada */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.sustainability-tips b::before {
+    content: counter(tip) ". ";
+    counter-increment: tip;
+    font-weight: bold;
+    margin-right: 5px;
+}
