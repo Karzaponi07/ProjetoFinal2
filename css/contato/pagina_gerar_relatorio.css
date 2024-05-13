@@ -1,0 +1,27 @@
+.gerador {
+    max-width: 800px;
+    margin: 20px auto 0; /* Reduzindo a margem superior para 20px */
+    text-align: center;
+    height: 100vh; /* Ocupa toda a altura da tela */
+    display: flex;
+    justify-content: auto;
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.gerador h1 {
+    margin-bottom: 20px;
+}
+
+.gerador button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff0000; /* Vermelho */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.gerador button:hover {
+    background-color: #cc0000; /* Tom mais escuro de vermelho ao passar o mouse */
+}

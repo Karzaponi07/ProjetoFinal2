@@ -31,5 +31,8 @@
 @import "./energiaresiduos/perguntas.css";
 @import "./contato/contato.css";
 @import "./contato/pagina_dois.css";
+@import "./contato/energia.css";
+@import "./descarte/descarte.css";
 
 @import "./cadastro/cadastro.css";
+@import "./contato/pagina_gerar_relatorio.css";
