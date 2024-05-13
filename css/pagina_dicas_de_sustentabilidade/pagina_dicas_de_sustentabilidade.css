@@ -49,6 +49,17 @@
   .dicas button:hover::after {
     transform: rotate(180deg);
   }
+
+.dicas dd{
+  display:none;
+
+}
+
+.dicas dd.ativa{
+  display:block;
+
+}
+
   
   .dicas dd {
     padding-left: 20px;
