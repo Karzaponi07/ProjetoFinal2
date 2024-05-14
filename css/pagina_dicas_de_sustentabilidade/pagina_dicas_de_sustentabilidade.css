@@ -46,7 +46,8 @@
     transition: 0.3s;
   }
   
-  .dicas button:hover::after {
+  .dicas button:hover::after,
+  .dicas button[aria-expanded="true"]::after {
     transform: rotate(180deg);
   }
 

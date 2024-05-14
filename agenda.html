@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos e Condições|CodeTech</title>
+    <meta name="description" content="Termos e Condições">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="preload" href="./css/style.css" as="style">
+    <link rel="stylesheet" href="./css/style.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">   
+</head>
+
+<body>
+    <header class="header-bg">
+        <div class="header container">
+           <a href="./"><img src="./img/logomarca.jpg" width="280" height="110" alt="Codetech"></a> 
+
+            <nav aria-label="primaria">
+                <ul class="header-menu">
+                    <li><a href="./energia.html">Energia</a></li>
+                    <li><a href="./descarte.html">Descarte</a></li>
+                    <li><a href="./pagina_gerar_relatorio.html">Gerar Relatório</a></li>
+                    <li><a href="./agenda.html">Agenda</a></li>
+                    <li><a href="./dicas_de sustentabilidade.html">Dicas de Sustentabilidade</a></li>
+                    <li><a href="./contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+h1 {
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #f5f5f5;
+}
+        /* Estilos para o modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        input[type="text"], input[type="date"], input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-events-btn {
+            background-color: #f44336;
+        }
+
+        .delete-events-btn:hover {
+            background-color: #dd3333;
+        }
+
+        .delete-row-btn {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="titulo-bg">
+        <div class="titulo container">
+          <p class="font-2-l-b cor-5">Coleta</p>
+          <h1 class="font-1-xxl cor-0">Agenda<span class="cor-p1">.</span></h1>
+        </div>
+      </div>
+    <table id="eventTable">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Tipo de Resíduo</th>
+                <th>Local</th>
+                <th>Início</th>
+                <th>Fim</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody id="eventList">
+            <!-- Linhas dos eventos serão adicionadas aqui -->
+        </tbody>
+    </table>
+    <button id="addEventBtn">Adicionar Evento</button>
+    <button id="deleteEventsBtn" class="delete-events-btn">Excluir Evento</button>
+    <button id="cancelDeleteBtn" style="display: none;">Cancelar</button> <!-- Removido um botão de cancelar -->
+</div>
+
+<!-- Modal para adicionar novo evento -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Novo Evento</h2>
+        <label for="eventDate">Data:</label>
+        <input type="date" id="eventDate">
+        <label for="eventType">Tipo de Resíduo:</label>
+        <input type="text" id="eventType">
+        <label for="eventLocation">Local:</label>
+        <input type="text" id="eventLocation">
+        <label for="eventStartTime">Horário de Início:</label>
+        <input type="time" id="eventStartTime">
+        <label for="eventEndTime">Horário de Fim:</label>
+        <input type="time" id="eventEndTime">
+        <button id="saveEventBtn">Salvar</button>
+    </div>
+</div>
+
+<script>
+    // Função para formatar a data
+    function formatDate(date) {
+        var options = { day: 'numeric', month: 'long', year: 'numeric' };
+        return new Date(date).toLocaleDateString('pt-BR', options);
+    }
+
+    // Função para carregar os eventos salvos do localStorage
+    function loadEvents() {
+        var savedEvents = localStorage.getItem('events');
+        if (savedEvents) {
+            document.getElementById('eventList').innerHTML = savedEvents;
+        }
+    }
+
+    // Carrega os eventos ao carregar a página
+    loadEvents();
+
+    var modal = document.getElementById('myModal');
+    var btn = document.getElementById("addEventBtn");
+    var span = document.getElementsByClassName("close")[0];
+    var deleteBtn = document.getElementById("deleteEventsBtn");
+    var cancelBtn = document.getElementById("cancelDeleteBtn");
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Limpar o modo de exclusão de evento quando a página é descarregada
+    window.addEventListener('beforeunload', function() {
+        deleteBtn.classList.remove("delete-mode");
+        cancelBtn.style.display = "none";
+
+        var deleteButtons = document.querySelectorAll('.delete-row-btn');
+        for (var i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].style.display = "none";
+        }
+    });
+
+    document.getElementById('saveEventBtn').addEventListener('click', function() {
+        var eventDate = formatDate(document.getElementById('eventDate').value);
+        var eventType = document.getElementById('eventType').value;
+        var eventLocation = document.getElementById('eventLocation').value;
+        var eventStartTime = document.getElementById('eventStartTime').value;
+        var eventEndTime = document.getElementById('eventEndTime').value;
+
+        // Cria uma nova linha para o evento
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>${eventDate}</td>
+            <td>${eventType}</td>
+            <td>${eventLocation}</td>
+            <td>${eventStartTime}</td>
+            <td>${eventEndTime}</td>
+            <td><button class="delete-row-btn">Excluir</button></td>
+        `;
+
+        // Adiciona a linha à tabela
+        document.getElementById('eventList').appendChild(newRow);
+
+        // Salva os eventos no localStorage
+        localStorage.setItem('events', document.getElementById('eventList').innerHTML);
+
+        modal.style.display = "none"; // Fecha o modal
+    });
+
+    deleteBtn.onclick = function() {
+        var deleteMode = deleteBtn.classList.toggle("delete-mode");
+        var deleteBtnText = deleteMode ? "Parar de Excluir " : "Excluir Evento";
+        deleteBtn.textContent = deleteBtnText;
+        cancelBtn.style.display = deleteMode ? "inline" : "none";
+
+        var deleteButtons = document.querySelectorAll('.delete-row-btn');
+        for (var i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].style.display = deleteMode ? "inline" : "none";
+        }
+    };
+
+    // Adiciona o evento de clique no botão de exclusão
+    document.getElementById('deleteEventsBtn').addEventListener('click', function() {
+        var deleteButtons = document.querySelectorAll('.delete-row-btn');
+        for (var i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].style.display = "inline";
+            deleteButtons[i].onclick = function() {
+                var row = this.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+                // Salva os eventos atualizados no localStorage
+                localStorage.setItem('events', document.getElementById('eventList').innerHTML);
+            };
+        }
+    });
+
+    // Adiciona o evento de clique no botão de cancelar exclusão
+    document.getElementById('cancelDeleteBtn').addEventListener('click', function() {
+        deleteBtn.classList.remove("delete-mode");
+        deleteBtn.textContent = "Excluir Evento";
+        cancelBtn.style.display = "none";
+
+        var deleteButtons = document.querySelectorAll('.delete-row-btn');
+        for (var i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>
